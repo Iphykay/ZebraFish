@@ -443,60 +443,6 @@ def rnn_model(Xtrain, Ytrain, bandID, num_feats, withrepr, reprtype, data3D_type
     return ntwrk, best_hps, optimizer, batch_size, num_epochs
 #
 
-
-# def myrnn(num_hidden_lyr, num_feats, len_seq=lngth_seq, data3D_type=bool):
-#     """
-#     A simple RNN model
-
-#     Input:
-#     -----
-#     n_gridpt_x    : grid size of x
-#     n_gridpt_y    : grid size of y
-#     num_hidden_lyr: # of hidden layer
-#     num_feats     : # of features used 
-#     len_seq       : length of the time samples
-
-#     Output:
-#     -------
-#     : Returns rnn model
-#     """
-    
-#     # Input 
-#     if data3D_type:
-#         # the height is treated like the time
-#         # input_img = tf.keras.Input(shape=(n_gridpt_x, n_gridpt_y))
-#         input_img = tf.keras.Input(shape=(len_seq, num_feats))
-
-#     else:
-#         if num_feats != None:
-#             input_img = tf.keras.Input(shape = (len_seq, num_feats))
-
-#     #
-#     model_ = input_img
-
-#     for i_lyr, i_units in zip(range(num_hidden_lyr), units):
-#         model_ = tf.keras.layers.SimpleRNN(i_units, return_sequences=True)(model_)
-        
-#     model_ = tf.keras.layers.SimpleRNN(lst_units, return_sequences=False,
-#                                        activation='relu')(model_)
-
-#     # # Flatten
-#     # model_ = tf.keras.layers.Flatten()(model_)
-
-#     # Dense Layer
-#     model_ = tf.keras.layers.Dense(dense_unit, activation='relu')(model_)
-
-#     # Last lyr
-#     last_lyr = tf.keras.layers.Dense(num_classes, activation='softmax')(model_)
-
-#     simple_rnn_ntwrk = tf.keras.Model(inputs=input_img, outputs=last_lyr)
-
-#     # Model summary
-#     simple_rnn_ntwrk.summary()
-
-#     return simple_rnn_ntwrk
-# #
-
 def rnn_learner(num_feats, Xtrain, Ytrain, Xtest, Ytest, model_name, bandID, withrepr,
                 reprtype, data3D_type=bool, pathGrp=str):
     
@@ -537,58 +483,6 @@ def rnn_learner(num_feats, Xtrain, Ytrain, Xtest, Ytest, model_name, bandID, wit
     return ntwrk, best_hps, history, predictions, predicted_classes
 #
     
-
-# def rnn_learner(num_feats, Xtrain, Ytrain, Xtest, Ytest, batch_size,
-#                 sm, savemodel=bool, data3D_type=bool):
-#     """
-#     Uses the RNN model to classify subjects
-
-#     Input:
-#     ------
-#     n_gridpt_x : grid size of x
-#     n_gridpt_y : grid size of y
-#     num_feats  : # of features
-#     Xtrain, Ytrain, Xtest, Ytest : The datasets from the split
-#     sm       : semester
-#     batch_size : number of batch_size
-#     savemodel: Whether to save the model 
-
-#     Outputs:
-#     --------
-#     : Returns model, model_history and predicted class
-#     """
-
-#     # THE MODEL
-#     simple_rnn_ntwrk = myrnn(num_hidden_lyr, num_feats, data3D_type=data3D_type)
-
-#     # Compile the netork
-#     simple_rnn_ntwrk.compile(optimizer=tf.keras.optimizers.AdamW(learning_rate), loss='sparse_categorical_crossentropy',
-#                              metrics=[metric])
-    
-#     # Training
-#     history = simple_rnn_ntwrk.fit(Xtrain, Ytrain, batch_size = batch_size, epochs = num_epochs, verbose=verbose,
-#                                    validation_split=split_num)
-    
-#     if savemodel:
-
-#         # Save the model weights
-#         simple_rnn_ntwrk.save(pathsaveweight + f"{sm}_RNN.keras")
-
-#     # Evaluate the model
-#     predtns  = simple_rnn_ntwrk.predict(Xtest)
-#     pred_cls = np.argmax(predtns, axis=1)
-
-#     pred_proba = np.max(predtns, axis=1)
-
-#     # See predictions
-#     correct_indicies   = np.nonzero(pred_cls == Ytest)[0]
-#     incorrect_indicies = np.nonzero(pred_cls != Ytest)[0] 
-
-#     return simple_rnn_ntwrk, history, pred_proba, pred_cls
-# #
-
-
-
 def rnn_output(img_data, num_feats, useinCV, model_name, bandID=None, name=None, withrepr=bool, 
                reprtype=str, data3D_type=True, pathGrp=str):
     """
