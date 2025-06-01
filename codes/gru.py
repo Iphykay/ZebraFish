@@ -7,7 +7,6 @@ Description:
     Uses GRU model to classify objects
 
 Authors:
-    Dr. Omer Muhammet Soysal
     Iphy Kelvin
 
 Date Created     : 04/28/2024
