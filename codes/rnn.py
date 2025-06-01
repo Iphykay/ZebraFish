@@ -7,7 +7,6 @@ Description:
     Uses RNN model to classify objects
 
 Authors:
-    Dr. Omer Muhammet Soysal
     Iphy Kelvin
 
 Date Created     : 11/23/2024
