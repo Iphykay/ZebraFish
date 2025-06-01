@@ -7,7 +7,6 @@ Description:
     Uses LSTM model to classify objects
 
 Authors:
-    Dr. Omer Muhammet Soysal
     Iphy Kelvin
 
 Date Created     : 04/23/2024
